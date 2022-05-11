@@ -1,0 +1,106 @@
+<div class="container">
+  <div class="hero">
+    <mat-card class="example-card">
+      <mat-card-title>Random Team Generator</mat-card-title>
+      <mat-card-subtitle>Angular practice</mat-card-subtitle>
+      <mat-card-content>
+        <mat-list role="list">
+          <mat-list-item role="listitem"
+            *ngFor="let player of players">{{ player }}</mat-list-item>
+        </mat-list>
+        <p class="error"
+          *ngIf="errorMessage">{{ errorMessage }}</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <div class="add-controls">
+          <mat-form-field class="example-full-width"
+            appearance="fill">
+            <mat-label>Player name</mat-label>
+            <input matInput
+              #playerInput
+              placeholder="name"
+              (input)="onInput(playerInput.value)"
+              [value]="newPlayerName"
+              (keyup.enter)="onAddPlayer()">
+          </mat-form-field>
+          <button mat-raised-button
+            color="primary"
+            (click)="onAddPlayer()">Add player</button>
+        </div>
+        <div class="generate-controls">
+          <mat-form-field class="example-full-width"
+            appearance="fill">
+            <mat-label>Number of teams</mat-label>
+            <input matInput
+              #teamInput
+              placeholder="amount"
+              (input)="onTeamInput(teamInput.value)"
+              (keyup.enter)="generateTeams()"
+              [value]="numberOfTeams"
+              type="number"
+              min="1"
+              max="10">
+          </mat-form-field>
+          <button mat-raised-button
+            color="accent"
+            (click)="generateTeams()">Generate</button>
+        </div>
+      </mat-card-actions>
+    </mat-card>
+    <mat-card *ngIf="teams.length"
+      class="teams">
+      <mat-card-title>
+        <button mat-fab
+          color="accent"
+          (click)="refresh()">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-card-title>
+      <mat-list>
+        <mat-list-item *ngFor="let team of teams">{{ team.join(' + ') }}</mat-list-item>
+      </mat-list>
+    </mat-card>
+  </div>
+</div>
+
+<style>
+  .hero {
+    max-width: 600px;
+    margin: 0 auto;
+    padding-top: 4em;
+  }
+
+  .mat-card-actions {
+    display: flex;
+    gap: 1em;
+  }
+
+  .add-controls,
+  .generate-controls {
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+  }
+
+  [role="list"] {
+    height: 300px;
+    max-height: 300px;
+    overflow-y: auto;
+  }
+
+  .error {
+    color: red;
+  }
+
+  .teams {
+    margin-top: 2em;
+  }
+</style>
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * The content above * * * * * * * * * * * -->
+<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
+<!-- * * * * * * * * * * and can be replaced. * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * End of Placeholder * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
